@@ -7,11 +7,6 @@ mod luma4;
 mod png;
 
 fn process_image(mut image: DynamicImage, width: u32, height: u32) -> Luma4Image {
-    let (width, height) = if image.width().cmp(&image.height()) != width.cmp(&height) {
-        (height, width)
-    } else {
-        (width, height)
-    };
     if image.width() > width || image.height() > height {
         image = image.resize(width, height, imageops::FilterType::Lanczos3);
     }
