@@ -1,7 +1,10 @@
 [package]
 name = "img2eink"
 version = "0.1.0"
+authors = ["SyoBoN"]
 edition = "2024"
+repository = "https://github.com/syobocat/img2eink"
+license = "BSD-3-Clause"
 
 [dependencies]
 anyhow = "1.0.98"
