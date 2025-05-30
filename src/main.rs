@@ -7,8 +7,8 @@ use image::ImageReader;
 #[clap(disable_help_flag = true)]
 struct App {
     /// Show this help
-    #[arg(long, action = ArgAction::Help)]
-    help: bool,
+    #[arg(long, action = ArgAction::HelpLong)]
+    help: Option<bool>,
 
     /// Traverse the directory recursively
     #[arg(short, long)]
