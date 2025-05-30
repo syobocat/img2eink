@@ -1,18 +1,32 @@
 use std::path::PathBuf;
 
-use clap::Parser;
+use clap::{ArgAction, Parser};
 use image::ImageReader;
 
 #[derive(Parser)]
+#[clap(disable_help_flag = true)]
 struct App {
+    /// Show this help
+    #[arg(long, action = ArgAction::Help)]
+    help: bool,
+
+    /// Traverse the directory recursively
     #[arg(short, long)]
-    recursive: bool,
+    recurse: bool,
+
+    /// File or directory to write converted image to
     #[arg(short, long)]
     dest: Option<PathBuf>,
+
+    /// Screen width of your E-ink device
     #[arg(short, long)]
     width: u32,
+
+    /// Screen height of your E-ink device
     #[arg(short, long)]
     height: u32,
+
+    /// File or directory to convert
     target: PathBuf,
 }
 
@@ -25,7 +39,7 @@ fn main() {
             let name = app.target.file_stem().unwrap().to_string_lossy();
             dir.join(format!("{name}_eink"))
         });
-        process_dir(app.target, dest, (app.width, app.height), app.recursive);
+        process_dir(app.target, dest, (app.width, app.height), app.recurse);
     } else {
         let image = ImageReader::open(&app.target)
             .expect("Target should be accessible")
